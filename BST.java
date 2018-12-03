@@ -3,9 +3,12 @@ package project6;
 import java.util.Collection;
 import java.util.NoSuchElementException;
 import java.lang.Iterable;
+import java.util.Iterator;
+import java.util.ArrayList;
 
-public class BST<E> implements Collection<E>, Iterable<E>{
-    
+
+public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> {
+
     private BSTNode<E> root = null;
     private int size = 0;
 
@@ -14,26 +17,28 @@ public class BST<E> implements Collection<E>, Iterable<E>{
 
     }
 
-    private class BSTNode<E>{
+    private class BSTNode<E> {
 
         private E data;
         private BSTNode<E> left;
         private BSTNode<E> right;
 
-        BSTNode(E data, BSTNode<E> left, BSTNode<E> right){
+        //BSTNode(E data, BSTNode<E> left, BSTNode<E> right){
+        BSTNode(E data){
             this.data = data;
-            this.left = left;
-            this.right = right;
+            this.left = null;
+            this.right = null;
         }
+
     }
 
     private class BSTinorderIterator implements Iterator<E>{
-        
+
         BSTNode<E> current = root;
-        ArrayList inList = new ArrayList();
+        ArrayList<E> inList = new ArrayList<E>();
         int index = 0;
 
-        inorderIterator(){
+        void inorderIterator(){
             inorderIteratorRecursive(root);
         }
 
@@ -70,10 +75,10 @@ public class BST<E> implements Collection<E>, Iterable<E>{
 
     private class BSTpreorderIterator implements Iterator<E>{
         BSTNode<E> current = root;
-        ArrayList preList = new ArrayList();
+        ArrayList<E> preList = new ArrayList<E>();
         int index = 0;
 
-        preorderIterator(){
+        void preorderIterator(){
             preorderIteratorRecursive(root);
         }
 
@@ -110,10 +115,10 @@ public class BST<E> implements Collection<E>, Iterable<E>{
 
     private class BSTpostorderIterator implements Iterator<E>{
         BSTNode<E> current = root;
-        ArrayList postList = new ArrayList();
+        ArrayList<E> postList = new ArrayList<E>();
         int index = 0;
 
-        postorderIterator(){
+        void postorderIterator(){
             postorderIteratorRecursive(root);
         }
 
@@ -167,7 +172,7 @@ public class BST<E> implements Collection<E>, Iterable<E>{
     * determine the indentation of each item
     * @param output the string that accumulated the string representation of this * BST
     */
-    private void preOrderPrint(Node<E> tree, int level, StringBuilder output) { 
+    private void preOrderPrint(BSTNode<E> tree, int level, StringBuilder output) { 
         if (tree != null) {
         String spaces = "\n";
             if (level > 0) {
@@ -207,10 +212,11 @@ public class BST<E> implements Collection<E>, Iterable<E>{
         if (e == null){
             return null;
         }
-        if (root.data < e.data){
+
+        if (root.data.compareTo(e) < 0){
             root = root.right;
         }
-        if (root.data > e.data){
+        if (root.data.compareTo(e) == 1){
             root = root.left;
         }
 
@@ -262,19 +268,27 @@ public class BST<E> implements Collection<E>, Iterable<E>{
         if (e == null){
             return false;
         }
+
+	    root = addRecursive(root, e);
+            return true;
+    }
+
+    BSTNode<E> addRecursive(BSTNode<E> root, E e) {
+
         if (root == null){
             root = new BSTNode<E>(e);
             size += 1;
         }
-        if (root.data < e.data){
-            root.right = add(e);
+
+        if (root.data.compareTo(e) == 1){
+            root.left = addRecursive(root.left, e);
+            size += 1;
+        } else if (root.data.compareTo(e)<0){
+            root.right = addRecursive(root.right, e);
             size += 1;
         }
-        if (root.data > e.data){
-            root.left = add(e);
-            size += 1;
-        }
-        return true;
+
+	    return root;
     }
 
 /**
