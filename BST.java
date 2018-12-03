@@ -245,6 +245,9 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
 
     public Object clone(){
         //returns a shallow copy of this tree instance
+        //chnage this maybe!
+        Object clone = this;
+        return clone;
     }
 
     public E first(){
@@ -351,6 +354,14 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
 
     public boolean containsAll(Collection<?> c){
         //Returns true if this collection contains all of the elements in the specified collection.
+        //for each item in collection, if contains returns false, return false, else return true
+        
+        for (Object o: c){
+            if(contains(o) == false){
+                return false;
+            }
+        }
+        return true;
 
     }
 
