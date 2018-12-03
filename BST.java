@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 
 public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> {
-
+    
     private BSTNode<E> root = null;
     private int size = 0;
 
@@ -32,17 +32,17 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
 
     }
 
-    private class BSTinorderIterator implements Iterator<E>{
-
+    public class BSTinorderIterator implements Iterator<E>{
+        
         BSTNode<E> current = root;
         ArrayList<E> inList = new ArrayList<E>();
         int index = 0;
 
-        void inorderIterator(){
+        public BSTinorderIterator(){
             inorderIteratorRecursive(root);
         }
 
-        public void inorderIteratorRecursive(BSTNode<E> root){
+        private void inorderIteratorRecursive(BSTNode<E> root){
             if (root!= null){
                 inorderIteratorRecursive(root.left);
                 inList.add(root.data);
@@ -73,16 +73,16 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
         }
     }
 
-    private class BSTpreorderIterator implements Iterator<E>{
+    public class BSTpreorderIterator implements Iterator<E>{
         BSTNode<E> current = root;
         ArrayList<E> preList = new ArrayList<E>();
         int index = 0;
 
-        void preorderIterator(){
+        public BSTpreorderIterator(){
             preorderIteratorRecursive(root);
         }
 
-        public void preorderIteratorRecursive(BSTNode<E> root){
+        private void preorderIteratorRecursive(BSTNode<E> root){
             if (root!= null){
                 preList.add(root.data);
                 preorderIteratorRecursive(root.left);
@@ -113,16 +113,16 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
         }
     }
 
-    private class BSTpostorderIterator implements Iterator<E>{
+    public class BSTpostorderIterator implements Iterator<E>{
         BSTNode<E> current = root;
         ArrayList<E> postList = new ArrayList<E>();
         int index = 0;
 
-        void postorderIterator(){
+        public BSTpostorderIterator(){
             postorderIteratorRecursive(root);
         }
 
-        public void postorderIteratorRecursive(BSTNode<E> root){
+        private void postorderIteratorRecursive(BSTNode<E> root){
             if (root!= null){
                 postorderIteratorRecursive(root.left);
                 postorderIteratorRecursive(root.right);
@@ -148,7 +148,6 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
     }
 
     public E get(E value){
-
     }
 
     public String toString(){
@@ -199,11 +198,11 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
     }
 
     public Iterator<E> preorderIterator(){
-
+	    return new BSTpreorderIterator();
     }
 
     public Iterator<E> postorderIterator(){
-
+	    return new BSTpostorderIterator();
     }
 
     public E ceiling (E e){
@@ -213,10 +212,10 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
             return null;
         }
 
-        if (root.data.compareTo(e) < 0){
+        if (root.data.compareTo(e)<0){
             root = root.right;
         }
-        if (root.data.compareTo(e) == 1){
+        if (root.data.comparTo(e) == 1){
             root = root.left;
         }
 
@@ -270,7 +269,7 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
         }
 
 	    root = addRecursive(root, e);
-            return true;
+        return true;
     }
 
     BSTNode<E> addRecursive(BSTNode<E> root, E e) {
@@ -280,7 +279,7 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
             size += 1;
         }
 
-        if (root.data.compareTo(e) == 1){
+        if (root.data.comparTo(e)==1){
             root.left = addRecursive(root.left, e);
             size += 1;
         } else if (root.data.compareTo(e)<0){
@@ -334,6 +333,7 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
     public Iterator<E> iterator(){
         //Returns an iterator over the elements in this collection. The elements should be 
         //returned in the order determined by the inorder traver- sal of the tree.
+	    return new BSTinorderIterator();
 
     }
 
