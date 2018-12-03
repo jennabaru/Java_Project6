@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import java.lang.Iterable;
 import java.util.Iterator;
 import java.util.ArrayList;
+import java.lang.Comparable;
 
 
 public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> {
@@ -148,7 +149,28 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
     }
 
     public E get(E value){
+        //if e if null, return null
+        if (e == null){
+            return null;
+        }
+        return getRecursive(root, e);
+
     }
+
+    private BSTNode<E> getRecursive(BSTNode<E> root, E e){
+        if (root == null){
+            return null;
+        }
+        if (root.data.compareTo(e) == 1){
+            root.left = getRecursive(root.left, e);
+        } else if (root.data.compareTo(e)<0){
+            root.right = getRecursive(root.right, e);
+        } else if (root.data.compareTo(e)==0){
+            return root.data;
+        }
+    }
+
+
 
     public String toString(){
 
@@ -157,7 +179,7 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
     /**
     * Produces tree like string representation of this BST.
     * @return string containing tree-like representation of this BST. 
-    * @author Joanna Klukowski
+    * @author Joanna Klukowska
     */
     public String toStringTreeFormat() {
         StringBuilder s = new StringBuilder();
@@ -215,7 +237,7 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
         if (root.data.compareTo(e)<0){
             root = root.right;
         }
-        if (root.data.comparTo(e) == 1){
+        if (root.data.compareTo(e) == 1){
             root = root.left;
         }
 
@@ -272,14 +294,14 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
         return true;
     }
 
-    BSTNode<E> addRecursive(BSTNode<E> root, E e) {
+    private BSTNode<E> addRecursive(BSTNode<E> root, E e) {
 
         if (root == null){
             root = new BSTNode<E>(e);
             size += 1;
         }
 
-        if (root.data.comparTo(e)==1){
+        if (root.data.compareTo(e)==1){
             root.left = addRecursive(root.left, e);
             size += 1;
         } else if (root.data.compareTo(e)<0){
@@ -301,11 +323,30 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
 
     public void clear(){
         root = null;
+        size = 0;
     }
 
     public boolean contains(Object o){
         //Returns true if this collection contains the specified element.
+        if (o == null){
+            return false;
+        }
+        return containsRecursive(root, o);
 
+    }
+
+    private boolean containsRecursive(BSTNode<E> root, Object o){
+        if (root == null){
+            return false;
+        }
+        E obj = (e)o;
+        if (root.data.compareTo(obj) == 1){
+            root.left = containsRecursive(root.left, obj);
+        } else if (root.data.compareTo(obj)<0){
+            root.right = containsRecursive(root.right, obj);
+        } else if (root.data.compareTo(obj)==0){
+            return true;
+        }
     }
 
     public boolean containsAll(Collection<?> c){
@@ -328,6 +369,10 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
 
     public boolean isEmpty(){
         //Returns true if this collection contains no elements.
+        if (root == null){
+            return true;
+        }
+        return false;
     }
 
     public Iterator<E> iterator(){
@@ -340,6 +385,7 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
     public boolean remove (Object o){
         //Removes a single instance of the specified element from this collection, if it is present.
     }
+
 /**
 * This method throws an error if called
 * @param c Collection
@@ -361,6 +407,7 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
 
     public int size(){
         //Returns the number of elements in this collection.
+        return size;
     }
 
     public Object[] toArray(){
