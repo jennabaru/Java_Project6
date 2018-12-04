@@ -330,15 +330,15 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
         }
 
         if (root.data.compareTo(e)==1){
-            size +=1;
-            return addRecursive(root.left, e);
-            //root.left = addRecursive(root.left, e);
-            //size += 1;
+            //size +=1;
+            //return addRecursive(root.left, e);
+            root.left = addRecursive(root.left, e);
+            size += 1;
         } else if (root.data.compareTo(e)<0){
-            size +=1;
-            return addRecursive(root.right, e);
-            //root.right = addRecursive(root.right, e);
-            //size += 1;
+            //size +=1;
+            //return addRecursive(root.right, e);
+            root.right = addRecursive(root.right, e);
+            size += 1;
         }
 
 	    return root;
@@ -427,27 +427,28 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
 
     }
 
-    // public boolean remove(Object o){
-    //     //Removes a single instance of the specified element from this collection, if it is present.
-    //     if (removeRecursive(root, o) == null){
-    //         return false;
-    //     }
-    //     return true;
+    public boolean remove(Object o){
+        // //Removes a single instance of the specified element from this collection, if it is present.
+        // if (removeRecursive(root, o) == null){
+        //     return false;
+        // }
+        // return true;
+        return false;
         
-    // }
+    }
 
-    // private BSTNode<E> removeRecursive(BSTNode<E> root, Object o){
-    //     E obj = (E)o;
-    //     if (root == null){
-    //         return root;
-    //     }else if (contains(o)== false){
-    //         return null;
-    //     }else if (root.data.compareTo(obj)==1){
-    //         root.left = addRecursive(root.left, obj);
-    //     } else if (root.data.compareTo(obj)<0){
-    //         root.right = addRecursive(root.right, obj);
-    //     }
-    // }
+    //private BSTNode<E> removeRecursive(BSTNode<E> root, Object o){
+        // E obj = (E)o;
+        // if (root == null){
+        //     return root;
+        // }else if (contains(o)== false){
+        //     return null;
+        // }else if (root.data.compareTo(obj)==1){
+        //     root.left = addRecursive(root.left, obj);
+        // } else if (root.data.compareTo(obj)<0){
+        //     root.right = addRecursive(root.right, obj);
+        // }
+    //}
 
 /**
 * This method throws an error if called
