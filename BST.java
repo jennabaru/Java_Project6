@@ -6,9 +6,11 @@ import java.lang.Iterable;
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.lang.Comparable;
+import java.util.Iterator;
 
 
-public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> {
+
+public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> {
     
     private BSTNode<E> root = null;
     private int size = 0;
@@ -150,10 +152,10 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
 
     public E get(E value){
         //if e if null, return null
-        if (e == null){
+        if (value == null){
             return null;
         }
-        return getRecursive(root, e);
+        return getRecursive(root, value);
 
     }
 
@@ -166,14 +168,29 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
         } else if (root.data.compareTo(e)<0){
             root.right = getRecursive(root.right, e);
         } else if (root.data.compareTo(e)==0){
+            //return root.data;
             return root.data;
         }
     }
 
 
-
+    @Override
     public String toString(){
+        
+        Iterator<E> iterator = new iterator();
 
+        StringBuilder str = new StringBuilder();
+        
+        str.append("[");
+        while(iterator.hasNext()){
+            //check to see if this line is correct, not sure
+            str.append(String.valueOf(iterator.next()));
+            if (iterator.hasNext()){
+                str.append(",");
+            }
+        }
+        str.append("]");
+        return str.toString();
     }
 
     /**
@@ -342,7 +359,7 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
         if (root == null){
             return false;
         }
-        E obj = (e)o;
+        E obj = (E)o;
         if (root.data.compareTo(obj) == 1){
             root.left = containsRecursive(root.left, obj);
         } else if (root.data.compareTo(obj)<0){
@@ -395,6 +412,11 @@ public class BST<E> extends Comparable<E> implements Collection<E>, Iterable<E> 
 
     public boolean remove (Object o){
         //Removes a single instance of the specified element from this collection, if it is present.
+        
+    }
+
+    private BSTNode<E> removeRecursive(BSTNode<E> root, Object o){
+
     }
 
 /**
