@@ -148,8 +148,8 @@ public class SFMovieData{
                 }
                 //if there are results, call toString method to print
                 else{
-                    for(i=0; i<titleResults.size();i++){
-                        System.out.println(titleResults.get(i).toString());
+                    for(Movie current : titleResults){
+                        System.out.println(current.toString());
                         System.out.println();
                     }
                 }
@@ -174,8 +174,8 @@ public class SFMovieData{
                 }
                 //call toString method to display results as output
                 else {
-                    for (i=0; i<actorResults.size(); i++) {
-                        System.out.println(actorResults.get(i).toString());
+                    for (Movie current : actorResults) {
+                        System.out.println(current.toString());
                     }
                 }
 

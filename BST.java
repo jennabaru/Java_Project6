@@ -155,7 +155,11 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
         if (value == null){
             return null;
         }
-        return getRecursive(root, value);
+        if(getRecursive(root, value) == null){
+            return null;
+        }else{
+            return getRecursive(root, value).data;
+        }
 
     }
 
@@ -163,21 +167,22 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
         if (root == null){
             return null;
         }
-        if (root.data.compareTo(e) == 1){
-            root.left = getRecursive(root.left, e);
+        if (root.data.compareTo(e) > 0){
+            return getRecursive(root.left, e);
         } else if (root.data.compareTo(e)<0){
-            root.right = getRecursive(root.right, e);
-        } else if (root.data.compareTo(e)==0){
+            return getRecursive(root.right, e);
+        } else {
             //return root.data;
-            return root.data;
+            return root;
         }
+        //return null;
     }
 
 
     @Override
     public String toString(){
         
-        Iterator<E> iterator = new iterator();
+        Iterator<E> iterator = iterator();
 
         StringBuilder str = new StringBuilder();
         
@@ -257,7 +262,7 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
         if (root.data.compareTo(e) == 1){
             root = root.left;
         }
-
+        return null;
     }
 
     public Object clone(){
@@ -279,10 +284,12 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
 
     public E floor (E e){
         //returns the greatest elemenr in this set less than of equal to the given element, or null if there isnt
+        return null;
     }
 
     public E higher (E e){
         //returns the least element in this set strictly greater than the given element, or null if there isnt
+        return null;
 
     }
 
@@ -298,9 +305,7 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
 
     public E lower (E e){
         //returns the greatest element in this set strictly less than the given elemtn, or null if there is none
-        if (root == null){
-
-        }
+        return null;
 
     }
 
@@ -309,8 +314,11 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
         if (e == null){
             return false;
         }
-
-	    root = addRecursive(root, e);
+        //if (contains(e)){
+        //    return false;
+        //}
+        root = addRecursive(root, e);
+        //size += 1;
         return true;
     }
 
@@ -351,13 +359,16 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
         if (o == null){
             return false;
         }
-        return containsRecursive(root, o);
+        if (containsRecursive(root, o) == null){
+            return false;
+        }
+        return true;
 
     }
 
-    private boolean containsRecursive(BSTNode<E> root, Object o){
+    private BSTNode<E> containsRecursive(BSTNode<E> root, Object o){
         if (root == null){
-            return false;
+            return null;
         }
         E obj = (E)o;
         if (root.data.compareTo(obj) == 1){
@@ -365,8 +376,9 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
         } else if (root.data.compareTo(obj)<0){
             root.right = containsRecursive(root.right, obj);
         } else if (root.data.compareTo(obj)==0){
-            return true;
+            return root;
         }
+        return null;
     }
 
     public boolean containsAll(Collection<?> c){
@@ -384,6 +396,7 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
 
     public boolean equals(Object o){
         //Compares the specified object with this collection for equality.
+        return false;
 
     }
 
@@ -412,10 +425,12 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
 
     public boolean remove (Object o){
         //Removes a single instance of the specified element from this collection, if it is present.
+        return false;
         
     }
 
     private BSTNode<E> removeRecursive(BSTNode<E> root, Object o){
+        return null;
 
     }
 
@@ -445,11 +460,14 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
 
     public Object[] toArray(){
         //Returns an array containing all of the elements in this collection.
+        return null;
 
     }
 
     public <T> T[] toArray (T[] a){
         //Returns an array containing all of the elements in this collection; the runtime type of the returned array is that of the specified array.
+        return null;
     }
+
 
 }

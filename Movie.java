@@ -71,6 +71,22 @@ public class Movie implements Comparable<Movie>{
         this.actor2 = actor2;
         this.actor3 = actor3;
     }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public Actor getActor1(){
+        return actor1;
+    }
+
+    public Actor getActor2(){
+        return actor2;
+    }
+
+    public Actor getActor3(){
+        return actor3;
+    }
 /**
  * This method adds location to list of locations for current movie object
  * @param loc Location object

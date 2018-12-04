@@ -9,7 +9,7 @@ import java.util.Collections;
 *
 * @author Jenna Baruch * @version 10/02/2018
 */
-public class MovieList extends ArrayList<Movie> {
+public class MovieList extends BST<Movie> {
     /**
      * Default constructor
      */
@@ -28,10 +28,10 @@ public class MovieList extends ArrayList<Movie> {
         // Search the the list of movies and see what contains the keywords
         MovieList results = new MovieList();
 
-        int i = 0;
-        for (i=0;i<size(); i++) {
-            if (get(i).title().toLowerCase().contains(keyword.toLowerCase())) {
-                results.add(get(i));
+        //int i = 0;
+        for (Movie obj : this) {
+            if (obj.getTitle().toLowerCase().contains(keyword.toLowerCase())) {
+                results.add(obj);
             }
         }
         //if there are no results
@@ -39,7 +39,7 @@ public class MovieList extends ArrayList<Movie> {
             return null;
         }
         //call compareTo to sort results
-        Collections.sort(results);
+        //Collections.sort(results);
         //return results movielist
         return results;
         
@@ -56,16 +56,16 @@ public class MovieList extends ArrayList<Movie> {
         }
         //create new Movielist
         MovieList results = new MovieList();
-        int i = 0;
-        for (i=0;i<size(); i++) {
-            if (get(i).getActor1() != null && get(i).getActor1().name().toLowerCase().contains(keyword.toLowerCase())) {
-                results.add(get(i));
+        //int i = 0;
+        for (Movie current : this) {
+            if (current.getActor1() != null && current.getActor1().name().toLowerCase().contains(keyword.toLowerCase())) {
+                results.add(current);
             }
-            if (get(i).getActor2() != null && get(i).getActor2().name().toLowerCase().contains(keyword.toLowerCase())) {
-                results.add(get(i));
+            if (current.getActor2() != null && current.getActor2().name().toLowerCase().contains(keyword.toLowerCase())) {
+                results.add(current);
             }
-            if (get(i).getActor3() != null && get(i).getActor3().name().toLowerCase().contains(keyword.toLowerCase())) {
-                results.add(get(i));
+            if (current.getActor3() != null && current.getActor3().name().toLowerCase().contains(keyword.toLowerCase())) {
+                results.add(current);
             }
         }
         //if there are no results
@@ -73,7 +73,7 @@ public class MovieList extends ArrayList<Movie> {
             return null;
         }
         //call compareTo to sort results
-        Collections.sort(results);
+        //Collections.sort(results);
         //return results movielist
         return results;
     }
@@ -84,10 +84,10 @@ public class MovieList extends ArrayList<Movie> {
  */
     public Movie find(Movie movie) {
 
-        int i;
-        for (i=0;i<size(); i++) {
-            if (get(i).equals(movie)) {
-                return get(i);
+        //int i;
+        for (Movie current : this) {
+            if (current.equals(movie)) {
+                return current;
             }
         }
         return null;
