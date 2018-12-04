@@ -11,6 +11,19 @@ import java.util.Iterator;
 
 
 public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> {
+
+    // public static void main(String[] args){
+    //     BST<Integer> a = new BST();
+    //     a.add(50);
+    //     a.add(null);
+    //     a.add(70);
+    //     a.add(20);
+    //     a.add(40);
+    //     a.add(60);
+    //     a.add(80);
+
+    //     System.out.println(a.toString());
+    // }
     
     private BSTNode<E> root = null;
     private int size = 0;
@@ -169,7 +182,7 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
         }
         if (root.data.compareTo(e) > 0){
             return getRecursive(root.left, e);
-        } else if (root.data.compareTo(e)<0){
+        } else if (root.data.compareTo(e) < 0){
             return getRecursive(root.right, e);
         } else {
             //return root.data;
@@ -256,7 +269,7 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
             return null;
         }
 
-        if (root.data.compareTo(e)<0){
+        if (root.data.compareTo(e) < 0){
             root = root.right;
         }
         if (root.data.compareTo(e) == 1){
@@ -314,11 +327,11 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
         if (e == null){
             return false;
         }
-        //if (contains(e)){
-        //    return false;
-        //}
+        if (contains(e)){
+            return false;
+        }
         root = addRecursive(root, e);
-        //size += 1;
+        size += 1;
         return true;
     }
 
@@ -326,22 +339,15 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
 
         if (root == null){
             root = new BSTNode<E>(e);
-            size += 1;
         }
 
-        if (root.data.compareTo(e)==1){
-            //size +=1;
-            //return addRecursive(root.left, e);
+        if (root.data.compareTo(e) > 0) {
             root.left = addRecursive(root.left, e);
-            size += 1;
-        } else if (root.data.compareTo(e)<0){
-            //size +=1;
-            //return addRecursive(root.right, e);
+        } else if (root.data.compareTo(e) < 0){
             root.right = addRecursive(root.right, e);
-            size += 1;
         }
 
-	    return root;
+	return root;
     }
 
 /**
@@ -371,18 +377,17 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
     }
 
     private BSTNode<E> containsRecursive(BSTNode<E> root, Object o){
-        if (root == null){
-            return null;
-        }
+
         E obj = (E)o;
-        if (root.data.compareTo(obj) == 1){
-            root.left = containsRecursive(root.left, obj);
-        } else if (root.data.compareTo(obj)<0){
-            root.right = containsRecursive(root.right, obj);
-        } else if (root.data.compareTo(obj)==0){
+
+        if (root == null || root.data.compareTo(obj) == 0){
             return root;
         }
-        return null;
+
+	if (root.data.compareTo(obj) > 0){
+            return containsRecursive(root.left, obj);
+	}
+            return containsRecursive(root.right, obj);
     }
 
     public boolean containsAll(Collection<?> c){
@@ -400,7 +405,25 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
 
     public boolean equals(Object o){
         //Compares the specified object with this collection for equality.
-        return false;
+
+        if (this.getClass() == o.getClass() && this == o) {
+            return true;
+        }
+
+        BST<?>objB = (BST<?>)o;
+        //checks if size is same
+        if (objB.size() != size()) {
+            return false;
+        }
+    
+
+        for (Object obj : objB) {
+            //if each node has same data is false
+            if(!contains(obj)) {
+                return false;
+            }
+        }
+        return true;
 
     }
 
@@ -476,7 +499,19 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
 
     public Object[] toArray(){
         //Returns an array containing all of the elements in this collection.
-        return null;
+        Object[] array = new Object[size()];
+
+        //make new node, set to head
+        //BSTNode<E> current = this.head;
+
+        Iterator<E> iterator = iterator();
+        int i = 0;
+        while(iterator.hasNext()) {
+            //add node to array
+            array[i] = iterator.next();
+            i = i + 1;
+        }
+        return array;
 
     }
 
@@ -487,3 +522,4 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
 
 
 }
+
