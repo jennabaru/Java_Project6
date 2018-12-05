@@ -6,7 +6,7 @@ import java.util.ArrayList;
 * provides parameters to create movie objects.
 * It has addLocation, toString, equals, and compareTo
 * methods.
-* @author Jenna Baruch * @version 10/02/2018
+* @author Jenna Baruch * @version 12/05s/2018
 */
 public class Movie implements Comparable<Movie>{
     private String title;
@@ -194,6 +194,9 @@ public class Movie implements Comparable<Movie>{
  * @return true if movies are the same, false if they are different
  */
     public Boolean equals(Movie movie) {
+        if (movie == null){
+            return false;
+        }
         if(movie.compareTo(this)==0){
             return true;
         }

@@ -10,7 +10,14 @@ import java.lang.Comparable;
 import java.util.Iterator;
 
 
-
+/**
+* This class extends the Comparable<E> interface 
+* and implements Collection<E> and Iterable<E> and
+* creates a binary search tree of any element E.
+* It houses internal node and three iterator classes 
+* as well as many methods for the BST.
+* @author Jenna Baruch * @version 12/05/2018
+*/
 public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> {
 
     // public static void main(String[] args){
@@ -37,7 +44,9 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
     // //     System.out.println(a.higher(19));
     // }
     
+    //BSTNode root elemenr
     private BSTNode<E> root = null;
+    // private size
     private int size = 0;
 
     //default constructor
@@ -45,6 +54,10 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
 
     }
 
+/**
+ * 
+ * @param <E>
+ */
     private class BSTNode<E> {
 
         private E data;
@@ -60,16 +73,26 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
 
     }
 
-    public class BSTinorderIterator implements Iterator<E>{
+/**
+ * 
+ */
+    private class BSTinorderIterator implements Iterator<E>{
         
         BSTNode<E> current = root;
         ArrayList<E> inList = new ArrayList<E>();
         int index = 0;
 
+        /**
+         * 
+         */
         public BSTinorderIterator(){
             inorderIteratorRecursive(root);
         }
 
+        /**
+         * 
+         * @param root
+         */
         private void inorderIteratorRecursive(BSTNode<E> root){
             if (root!= null){
                 inorderIteratorRecursive(root.left);
@@ -93,6 +116,9 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
             return nextValue;
         }
 
+/**
+ * 
+ */
         public boolean hasNext(){
             if (index < inList.size()){
                 return true;
@@ -100,6 +126,7 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
             return false;
         }
     }
+
 
     public class BSTpreorderIterator implements Iterator<E>{
         BSTNode<E> current = root;
@@ -140,8 +167,10 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
             return false;
         }
     }
-
-    public class BSTpostorderIterator implements Iterator<E>{
+/** 
+ * 
+*/
+    private class BSTpostorderIterator implements Iterator<E>{
         BSTNode<E> current = root;
         ArrayList<E> postList = new ArrayList<E>();
         int index = 0;

@@ -7,7 +7,7 @@ import java.util.Collections;
 * for matching keywords as well as a method to find a movie
 * in database.
 *
-* @author Jenna Baruch * @version 10/02/2018
+* @author Jenna Baruch * @version 12/05/2018
 */
 public class MovieList extends BST<Movie> {
     /**
