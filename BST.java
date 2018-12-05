@@ -215,6 +215,7 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
         while(iterator.hasNext()){
             //check to see if this line is correct, not sure
             str.append(String.valueOf(iterator.next()));
+            
             if (iterator.hasNext()){
                 str.append(",");
             }

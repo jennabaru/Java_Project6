@@ -160,7 +160,7 @@ public class Movie implements Comparable<Movie>{
 
         }
         //if there is only 1 actor in a movie
-        else{
+        else if (actor1!=null) {
             //format movie output with 1 actor
             String movieOutput = String.format("%s (%d) \n------------------------------------ \ndirector\t: %s\nwriter\t\t: %s\nstarring\t: %s\nfilmed on location at:\n",
             title, year, director, writer, actor1.name());
@@ -169,7 +169,7 @@ public class Movie implements Comparable<Movie>{
 
             int i=0;
             //if there is a funFact
-            if (location.get(i).getFunFact()!= null && (!(location.get(i).getFunFact().isEmpty()))){
+            if (location!=null && location.get(i).getFunFact()!= null && (!(location.get(i).getFunFact().isEmpty()))){
                 for(i=0; i<location.size(); i++) {
                     locations = locations.concat(String.format("\t%s (%s)\n", location.get(i).getLocation(), location.get(i).getFunFact()));
                 }
@@ -185,6 +185,7 @@ public class Movie implements Comparable<Movie>{
             //return string of correct movie display output
             return movieOutput;
         }
+        return "";
     }
 /**
  * This method calls

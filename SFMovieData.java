@@ -182,12 +182,14 @@ public class SFMovieData{
                 System.out.println("Enter your search query: ");
                 System.out.println();
            }
-           else {
+           else if (cmd[0].equalsIgnoreCase("quit")){
                 //if user eneters quit
-                if (cmd[0].equalsIgnoreCase("quit")){
+                //if (cmd[0].equalsIgnoreCase("quit")){
                    userQuit=true;
                    break;
-               }
+               //}
+           }else{
+            System.err.println("Usage Error: program expects title keyword, actor keyword, or quit. Try again");
            }
        }
     }
