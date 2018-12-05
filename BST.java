@@ -18,16 +18,23 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
     //     a.add(50);
     //     a.add(30);
     //     a.add(70);
-    //     a.add(20);
-    //     a.add(40);
-    //     a.add(60);
-    //     a.add(80);
-    //     a.add(25);
+    //     //System.out.println(a.toString());
+    //     System.out.println(a.size());
+    //     //System.out.print(a.remove(50));
+    //     //a.remove(30);
+    //     //a.add(20);
+    //     System.out.println(a.size());
+    //     //System.out.println(a.toString());
+    // //     a.add(20);
+    // //     a.add(40);
+    // //     a.add(60);
+    // //     a.add(80);
+    // //     a.add(25);
 
-    //     System.out.println(a.higher(26));
-    //     System.out.println(a.higher(70));
-    //     System.out.println(a.higher(80));
-    //     System.out.println(a.higher(19));
+    // //     System.out.println(a.higher(26));
+    // //     System.out.println(a.higher(70))s;
+    // //     System.out.println(a.higher(80));
+    // //     System.out.println(a.higher(19));
     // }
     
     private BSTNode<E> root = null;
@@ -526,9 +533,13 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
     //reference picture from class
     public boolean remove(Object o){
         // //Removes a single instance of the specified element from this collection, if it is present.
-        // if (removeRecursive(root, o) == null){
-        //     return false;
-        // }
+        if (removeRecursive(root, o) == null){
+            return false;
+        }
+        //size -=1;
+        //System.out.println(size);
+        size -=1;
+        //System.out.println(size);
         return true;
         
     }
@@ -536,15 +547,37 @@ public class BST<E extends Comparable<E>> implements Collection<E>, Iterable<E> 
     private BSTNode<E> removeRecursive(BSTNode<E> root, Object o){
         E obj = (E)o;
         if (root == null){
-            return root;
-        }else if (contains(o)== false){
             return null;
-        }else if (root.data.compareTo(obj)==1){
-            root.left = addRecursive(root.left, obj);
-        } else if (root.data.compareTo(obj)<0){
-            root.right = addRecursive(root.right, obj);
+        }if (contains(o)== false){
+            return null;
+        }if (root.data.compareTo(obj) < 0){
+            root.right = removeRecursive(root.right, obj);
+            //size -= 1;
+        } else if (root.data.compareTo(obj) > 00){
+            root.left = removeRecursive(root.left, obj);
+            //size -= 1;
+        }else{
+            if (root.right == null){
+                return root.left;
+            }else if (root.left == null){
+                return root.right;
+            }
+
+            root.data = minValue(root.right);
+
+            root.right = removeRecursive(root.right, root.data);
+            //size -= 1;
         }
-        return null;
+        return root;
+    }
+
+    public E minValue(BSTNode<E> root){
+        E minValue = root.data;
+        while (root.left != null){
+            minValue = root.left.data;
+            root = root.left;
+        }
+        return minValue;
     }
 
 /**
