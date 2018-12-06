@@ -11,8 +11,7 @@ import java.util.Arrays;
 * the movies with those keywords are then displayed to the user. 
 * This is run on a loop until the user quits the program. This class
 * also opens the file to read in data.
-*
-* @author Jenna Baruch * @version 10/02/2018
+* @author Jenna Baruch * @version 12/05/2018
 */
 public class SFMovieData{
     /**
@@ -183,11 +182,8 @@ public class SFMovieData{
                 System.out.println();
            }
            else if (cmd[0].equalsIgnoreCase("quit")){
-                //if user eneters quit
-                //if (cmd[0].equalsIgnoreCase("quit")){
                    userQuit=true;
                    break;
-               //}
            }else{
             System.err.println("Usage Error: program expects title keyword, actor keyword, or quit. Try again");
            }

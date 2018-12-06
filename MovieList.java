@@ -3,7 +3,7 @@ package project6;
 import java.util.ArrayList;
 import java.util.Collections;
 /**
-* This class extends ArrayaList<Movie>. It has methods to search
+* This class extends BST<Movie>. It has methods to search
 * for matching keywords as well as a method to find a movie
 * in database.
 *
@@ -72,8 +72,6 @@ public class MovieList extends BST<Movie> {
         if(results.size()==0){
             return null;
         }
-        //call compareTo to sort results
-        //Collections.sort(results);
         //return results movielist
         return results;
     }

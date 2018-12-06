@@ -6,7 +6,7 @@ import java.util.ArrayList;
 * provides parameters to create movie objects.
 * It has addLocation, toString, equals, and compareTo
 * methods.
-* @author Jenna Baruch * @version 12/05s/2018
+* @author Jenna Baruch * @version 12/05/2018
 */
 public class Movie implements Comparable<Movie>{
     private String title;
@@ -168,16 +168,18 @@ public class Movie implements Comparable<Movie>{
             String locations = "";
 
             int i=0;
-            //if there is a funFact
-            if (location!=null && location.get(i).getFunFact()!= null && (!(location.get(i).getFunFact().isEmpty()))){
+            //while location exists
+            if (location!=null) { 
                 for(i=0; i<location.size(); i++) {
-                    locations = locations.concat(String.format("\t%s (%s)\n", location.get(i).getLocation(), location.get(i).getFunFact()));
-                }
-            }
-            //if there is no associated funFact
-            else{
-                for(i=0; i<location.size(); i++) {
-                    locations = locations.concat(String.format("\t%s\n", location.get(i).getLocation()));
+                    //if there is a funfact
+                    if (location.get(i).getFunFact()!= null && (!(location.get(i).getFunFact().isEmpty()))){
+                            locations = locations.concat(String.format("\t%s (%s)\n", location.get(i).getLocation(), location.get(i).getFunFact()));
+                    }
+                    //if there is no associated funFact
+                    else {
+                
+                        locations = locations.concat(String.format("\t%s\n", location.get(i).getLocation()));       
+                    }
                 }
             }
             //concat strings
